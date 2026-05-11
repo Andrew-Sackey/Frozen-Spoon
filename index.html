@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frozen Spoon</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Pacifico&display=swap" rel="stylesheet" />
+
+  <!-- Preload statement section background images so they're ready when the section is reached -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=1200&h=800&fit=crop&q=80" />
+  <link rel="preload" as="image" href="images/sta-2.JPEG" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- =====================================================
+       LOADER
+  ===================================================== -->
+  <div id="loader">
+    <!-- Replace src with your logo file path -->
+    <img src="images/logo.png" alt="Frozen Spoon" class="loader-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+    <div class="loader-logo-placeholder">Your Logo</div>
+    <p class="loader-caption">Scooping&hellip;</p>
+    <div class="loader-bar"></div>
+  </div>
+
+  <!-- =====================================================
+       NAV
+  ===================================================== -->
+  <nav id="nav">
+    <a href="#" class="nav-logo-link">
+      <!-- Replace src with your logo file path -->
+      <img src="images/logo.png" alt="Frozen Spoon" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <div class="nav-logo-placeholder">Your Logo</div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#"              class="nav-link active">Home</a></li>
+      <li><a href="#about"         class="nav-link">About</a></li>
+      <li><a href="#menu"          class="nav-link">Menu</a></li>
+      <li><a href="#gallery"       class="nav-link">Gallery</a></li>
+      <li><a href="#services"      class="nav-link">What We Do</a></li>
+      <li><a href="#testimonials"  class="nav-link">Testimonials</a></li>
+    </ul>
+
+    <a href="#menu" class="nav-cta">Find a spoon</a>
+
+    <!-- Hamburger — only visible on mobile -->
+    <button class="nav-ham" id="nav-ham" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile full-screen drawer -->
+  <div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+    <nav class="nav-drawer-inner">
+      <a href="#"             class="nav-drawer-link">Home</a>
+      <a href="#about"        class="nav-drawer-link">About</a>
+      <a href="#menu"         class="nav-drawer-link">Menu</a>
+      <a href="#gallery"      class="nav-drawer-link">Gallery</a>
+      <a href="#services"     class="nav-drawer-link">What We Do</a>
+      <a href="#testimonials" class="nav-drawer-link">Testimonials</a>
+      <a href="#menu" class="nav-drawer-cta">Find a spoon</a>
+    </nav>
+  </div>
+
+  <!-- =====================================================
+       HERO
+  ===================================================== -->
+  <section id="hero">
+
+    <!-- Animated background color layer -->
+    <div id="hero-bg"></div>
+
+    <!-- ── Editorial headline ──────────────────────────── -->
+    <div class="hero-content">
+      <p class="hero-eyebrow" id="hero-eyebrow">House Special</p>
+
+      <h1 class="hero-headline">
+        <span class="hero-headline-line line-1" id="headline-line1">The art</span>
+        <span class="hero-headline-line line-2" id="headline-line2">of the plate.</span>
+      </h1>
+
+      <p class="hero-desc" id="hero-desc">
+        Hand-rolled meatballs, slow-simmered tomato,<br />a snow of aged parmesan. Comfort, made precise.
+      </p>
+
+      <a href="#menu" class="hero-cta">Find a spoon &rarr;</a>
+    </div>
+
+    <!-- ── Orbit images ────────────────────────────────── -->
+    <div class="hero-orbit-wrap">
+      <div id="orbit-track">
+
+        <!-- Item 0 · Spaghetti & Meatballs -->
+        <div class="orbit-item" data-index="0"
+             data-eyebrow="House Special"
+             data-line1="The art"
+             data-line2="of the plate."
+             data-desc="Hand-rolled meatballs, slow-simmered tomato,&lt;br /&gt;a snow of aged parmesan. Comfort, made precise."
+             data-bg="#F5EFE6">
+          <div class="orbit-circle">
+            <img src="images/meate-ball.JPEG" alt="Spaghetti and meatballs" />
+          </div>
+        </div>
+
+        <!-- Item 1 · Waffles -->
+        <div class="orbit-item" data-index="1"
+             data-eyebrow="Signature"
+             data-line1="The art"
+             data-line2="of the drip."
+             data-desc="Crisp Liège waffle, mousse, slow drip.&lt;br /&gt;Built to be eaten on the way home."
+             data-bg="#EDE8DC">
+          <div class="orbit-circle">
+            <img src="images/waffle.JPEG" alt="Liège waffle with mousse" />
+          </div>
+        </div>
+
+        <!-- Item 2 · Shake -->
+        <div class="orbit-item" data-index="2"
+             data-eyebrow="Cold Pour"
+             data-line1="A glass,"
+             data-line2="deeply considered."
+             data-desc="Strawberries pressed this morning,&lt;br /&gt;stirred into cream, served before they settle."
+             data-bg="#F9E4EC">
+          <div class="orbit-circle">
+            <img src="images/new-shake.JPEG" alt="Strawberry shake" />
+          </div>
+        </div>
+
+        <!-- Item 3 · Ice Cream -->
+        <div class="orbit-item" data-index="3"
+             data-eyebrow="House Scoop"
+             data-line1="Cold cream,"
+             data-line2="warm chocolate."
+             data-desc="Single-origin chocolate ribboned through&lt;br /&gt;Madagascan vanilla. Finished by hand."
+             data-bg="#F0ECE6">
+          <div class="orbit-circle">
+            <img src="images/ice-cream.jpeg" alt="Ice cream with chocolate" />
+          </div>
+        </div>
+
+      </div><!-- /orbit-track -->
+
+      <!-- Progress dots -->
+      <div class="orbit-dots">
+        <button class="orbit-dot active" data-dot="0" aria-label="Item 1"></button>
+        <button class="orbit-dot"        data-dot="1" aria-label="Item 2"></button>
+        <button class="orbit-dot"        data-dot="2" aria-label="Item 3"></button>
+        <button class="orbit-dot"        data-dot="3" aria-label="Item 4"></button>
+      </div>
+    </div><!-- /hero-orbit-wrap -->
+
+    <!-- Scroll hint -->
+    <div class="hero-scroll-hint">
+      <span class="scroll-line"></span>
+      Scroll
+    </div>
+
+  </section>
+
+  <!-- =====================================================
+       PLACEHOLDER — next sections go here
+  ===================================================== -->
+  <!-- =====================================================
+       ABOUT SECTION
+       Slot this block right after </section> of #hero
+       (before #placeholder-next)
+  ===================================================== -->
+  <section id="about">
+
+    <!-- Dark panel that wipes up over the hero -->
+    <div id="about-panel">
+
+      <!-- About badge top-left -->
+      <div class="about-badge">
+        <span class="badge-dot"></span>
+        About Us
+      </div>
+
+      <!-- Scrub text block -->
+      <div class="about-text-wrap">
+        <p class="about-eyebrow">Since 2019 · Made by hand</p>
+
+        <!-- Each word gets its own span — JS splits and wraps -->
+        <p class="about-body scrub-text">
+          We are three friends and one freezer. We make small batches because that is the only way we know how. Every scoop, every drip, every warm waffle that leaves our kitchen carries the same quiet intention — to make the exact thing you needed without you knowing you needed it. No shortcuts. No noise. Just cold cream, warm chocolate, and the slow afternoon feeling of something made right.
+        </p>
+      </div>
+
+      <!-- Logo — drops down into the marquee strip; words scroll over it -->
+      <div class="about-logo-wrap">
+        <img
+          src="images/logo.png"
+          alt="Frozen Spoon"
+          class="about-logo-img"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+        />
+        <div class="about-logo-placeholder">Frozen Spoon</div>
+      </div>
+
+      <!-- Scrolling marquee ticker -->
+      <div class="about-marquee-wrap">
+        <div class="about-marquee">
+          <div class="marquee-track" id="marquee-track">
+            <!-- Items duplicated in JS for infinite loop -->
+            <span class="marquee-item c-yellow">Gelato</span>
+            <span class="marquee-sep">&middot;</span>
+            <span class="marquee-item c-pink">Waffles</span>
+            <span class="marquee-sep">&middot;</span>
+            <span class="marquee-item c-white">Pancakes</span>
+            <span class="marquee-sep">&middot;</span>
+            <span class="marquee-item c-yellow">Shakes</span>
+            <span class="marquee-sep">&middot;</span>
+            <span class="marquee-item c-pink">Smoothies</span>
+            <span class="marquee-sep">&middot;</span>
+            <span class="marquee-item c-white">Soft Serve</span>
+            <span class="marquee-sep">&middot;</span>
+            <span class="marquee-item c-yellow">Rolls</span>
+            <span class="marquee-sep">&middot;</span>
+            <span class="marquee-item c-pink">Drip Cake</span>
+            <span class="marquee-sep">&middot;</span>
+            <span class="marquee-item c-white">Jollof</span>
+            <span class="marquee-sep">&middot;</span>
+            <span class="marquee-item c-yellow">Cold Brew</span>
+            <span class="marquee-sep">&middot;</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /about-panel -->
+  </section><!-- /about -->
+  <!-- =====================================================
+       END ABOUT SECTION
+  ===================================================== -->
+
+
+  <!-- =====================================================
+       VIDEO SECTION  ("The Wow Page")
+       Slot this block after the closing </section> of #about
+       This section is NOT in the nav — it sits between
+       About and whatever comes next.
+  ===================================================== -->
+  <section id="video-section">
+
+    <!-- Animated background blobs -->
+    <div class="vid-blob vid-blob-1"></div>
+    <div class="vid-blob vid-blob-2"></div>
+    <div class="vid-blob vid-blob-3"></div>
+    <div class="vid-blob vid-blob-4"></div>
+    <div class="vid-blob vid-blob-5"></div>
+
+    <!-- Cursor follower dot (JS moves this) -->
+    <div id="vid-cursor">
+      <span id="vid-cursor-label">Watch</span>
+    </div>
+
+    <!-- Section headline — JS swaps per video -->
+    <div class="vid-headline-wrap">
+      <p class="vid-eyebrow">In the kitchen</p>
+      <h2 class="vid-headline" id="vid-headline">
+        <!-- JS splits this into .char spans on init -->
+        Made slow. Eaten fast.
+      </h2>
+    </div>
+
+    <!-- Video frame -->
+    <div class="vid-frame-wrap" id="vid-frame-wrap">
+      <div class="vid-frame" id="vid-frame">
+
+        <!-- Four video slots -->
+        <video class="vid-player active" id="vid-0"
+               src="videos/Affogato-.mp4"
+               muted playsinline preload="auto"
+               data-headline="The art lives in the drip."
+               data-words="drip · pour · swirl · melt">
+        </video>
+        <video class="vid-player" id="vid-1"
+               src="videos/Biscoff-Pancakes-.mp4"
+               muted playsinline preload="auto"
+               data-headline="Made slow. Eaten fast."
+               data-words="stack · drizzle · fold · serve">
+        </video>
+        <video class="vid-player" id="vid-2"
+               src="videos/Cinnamon-pancakes-2.mp4"
+               muted playsinline preload="auto"
+               data-headline="Cold cream, warm everything."
+               data-words="warm · spice · ribbon · pour">
+        </video>
+        <video class="vid-player" id="vid-3"
+               src="videos/Fish%20%26%20Chips.MP4"
+               muted playsinline preload="auto"
+               data-headline="Served before it settles."
+               data-words="crisp · plate · salt · rush">
+        </video>
+
+        <!-- Placeholder shown when no video src is loaded -->
+        <div class="vid-placeholder" id="vid-placeholder">
+          <div class="placeholder-inner">
+            <span class="placeholder-icon">&#9654;</span>
+            <p class="placeholder-label">Video placeholder</p>
+            <p class="placeholder-sub">Drop your .mp4 files in <code>videos/</code></p>
+          </div>
+        </div>
+
+        <!-- Crossfade overlay — used during transitions -->
+        <div class="vid-transition-overlay" id="vid-overlay"></div>
+
+        <!-- Progress bar — bottom of the frame -->
+        <div class="vid-progress-bar">
+          <div class="vid-progress-fill" id="vid-progress-fill"></div>
+        </div>
+
+        <!-- Video counter -->
+        <div class="vid-counter" id="vid-counter">01 / 04</div>
+
+        <!-- Mute / unmute toggle -->
+        <button class="vid-mute-btn" id="vid-mute-btn" aria-label="Toggle sound">
+          <!-- Muted icon (shown by default) -->
+          <svg class="mute-icon icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+          <!-- Unmuted icon (hidden by default) -->
+          <svg class="mute-icon icon-unmuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+        </button>
+
+        <!-- Border pulse ring -->
+        <div class="vid-border-ring" id="vid-border-ring"></div>
+
+      </div><!-- /vid-frame -->
+    </div><!-- /vid-frame-wrap -->
+
+    <!-- Color word strip -->
+    <div class="vid-word-strip" id="vid-word-strip">
+      <!-- JS renders these from data-words on each video -->
+      <span class="strip-word c1">drip</span>
+      <span class="strip-sep">&middot;</span>
+      <span class="strip-word c2">swirl</span>
+      <span class="strip-sep">&middot;</span>
+      <span class="strip-word c3">scoop</span>
+      <span class="strip-sep">&middot;</span>
+      <span class="strip-word c4">pour</span>
+    </div>
+
+    <!-- Dot indicators -->
+    <div class="vid-dots">
+      <button class="vid-dot active" data-vdot="0"></button>
+      <button class="vid-dot"        data-vdot="1"></button>
+      <button class="vid-dot"        data-vdot="2"></button>
+      <button class="vid-dot"        data-vdot="3"></button>
+    </div>
+
+  </section>
+  <!-- =====================================================
+       END VIDEO SECTION
+  ===================================================== -->
+
+
+
+
+  <!-- =====================================================
+       MENU SECTION
+  ===================================================== -->
+  <section id="menu" aria-label="Menu">
+
+    <!-- Act 1 ── Cover panel (clips up on scroll entry) -->
+    <div id="menu-cover">
+
+      <!-- Section header -->
+      <h2 class="menu-label">Menu</h2>
+      <p class="menu-cover-eyebrow">A short list.</p>
+
+      <!-- Three-line editorial headline — mixed fonts + coloured words -->
+      <div class="menu-cover-headline">
+        <div class="mch-line mch-line-1">
+          <span class="mch-inner">Start with the <em class="hw hw-coffee">coffee,</em></span>
+        </div>
+        <div class="mch-line mch-line-2">
+          <span class="mch-inner">Linger over the <em class="hw hw-food">food,</em></span>
+        </div>
+        <div class="mch-line mch-line-3">
+          <span class="mch-inner">and stay for <em class="hw hw-dessert">dessert.</em></span>
+        </div>
+      </div>
+
+      <p class="menu-cover-sub">Scroll to explore &darr;</p>
+    </div>
+
+    <!-- Act 2 ── Horizontal panels (Food · Drinks · Desserts) -->
+    <div id="menu-horiz-outer">
+      <div id="menu-horiz-track">
+
+        <!-- ── PANEL 1: FOOD ─────────────────────────── -->
+        <div class="menu-panel" data-panel="food">
+          <div class="panel-header">
+            <p class="panel-eyebrow">01 / 03</p>
+            <h3 class="panel-title">Food</h3>
+            <p class="panel-hint">Choose a category &rarr;</p>
+          </div>
+          <div class="panel-categories">
+
+            <button class="cat-card" data-cat="breakfast"
+              data-items='[
+                {"name":"Lebanese Labneh Sandwich","desc":"Lebanese saj bread, labneh, tomatoes, cucumber, fresh green olives, mint leaves & pitted green olives with extra virgin olive oil"},
+                {"name":"Smoked Salmon Bagel","desc":"Bagel, smoked salmon, dill cream cheese, cucumber, onions, chives, mayonnaise, salt & black pepper"},
+                {"name":"Croque Madame Bagel","desc":"Sourdough bread, ham, emmental cheese, egg, mayonnaise & béchamel sauce"},
+                {"name":"Balsamic Avocado Bagel","desc":"Bagel, avocado, tomatoes, red onions, mayonnaise & black pepper"}
+              ]'>
+              <!-- Replace src with your own breakfast image -->
+              <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&h=400&fit=crop&q=80" alt="Breakfast" />
+              <span class="cat-label">Breakfast</span>
+            </button>
+
+            <button class="cat-card" data-cat="salads"
+              data-items='[
+                {"name":"Garden Salad","desc":"Fresh seasonal greens, cherry tomatoes, cucumber, red onion & house vinaigrette"},
+                {"name":"Avocado Salad","desc":"Creamy avocado, mixed leaves, feta, pomegranate & lemon dressing"},
+                {"name":"Caesar Salad","desc":"Crisp romaine, parmesan shavings, croutons & classic Caesar dressing"}
+              ]'>
+              <!-- Replace src with your own salads image -->
+              <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop&q=80" alt="Salads" />
+              <span class="cat-label">Salads</span>
+            </button>
+
+            <button class="cat-card" data-cat="sandwiches"
+              data-items='[
+                {"name":"Tuna, Avocado & Sweetcorn Club","desc":"Tuna, avocado, sweetcorn, lettuce, cucumber & mayonnaise"},
+                {"name":"Chicken, Bacon & Avocado Club","desc":"Chicken, bacon, avocado, black pepper, lettuce & cucumber"},
+                {"name":"Ham & Turkey Club","desc":"Ham, turkey breast, white cheddar, mozzarella, tomatoes, lettuce, baby spinach, mustard & mayonnaise"},
+                {"name":"Smoked Turkey Breast Sandwich","desc":"Chicken breast, lemon, rosemary, cheese, tomatoes, lettuce & mayonnaise"}
+              ]'>
+              <!-- Replace src with your own sandwiches image -->
+              <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&h=400&fit=crop&q=80" alt="Sandwiches" />
+              <span class="cat-label">Sandwiches</span>
+            </button>
+
+            <button class="cat-card" data-cat="burgers"
+              data-items='[
+                {"name":"Classic Beef Burger","desc":"Beef patty, tomatoes, lettuce, burger sauce & mayonnaise with fries"},
+                {"name":"Crispy Chicken Burger","desc":"Crispy fried chicken, slaw, pickles, sriracha mayo & toasted brioche"},
+                {"name":"Mushroom Swiss Burger","desc":"Beef patty, sautéed mushrooms, Swiss cheese, caramelised onions & mustard aioli"}
+              ]'>
+              <!-- Replace src with your own burgers image -->
+              <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&h=400&fit=crop&q=80" alt="Burgers" />
+              <span class="cat-label">Burgers</span>
+            </button>
+
+            <button class="cat-card" data-cat="alacarte"
+              data-items='[
+                {"name":"Spaghetti & Meatballs","desc":"Hand-rolled meatballs, slow-simmered tomato sauce, a snow of aged parmesan"},
+                {"name":"Penne Arrabbiata","desc":"Penne, spicy tomato & garlic sauce, fresh basil & parmesan"},
+                {"name":"Carbonara","desc":"Spaghetti, pancetta, egg yolk, parmesan & cracked black pepper"}
+              ]'>
+              <!-- Replace src with your own à la carte image -->
+              <img src="./images/ala carte.jpeg" alt="À La Carte" />
+              <span class="cat-label">À La Carte</span>
+            </button>
+
+          </div><!-- /panel-categories -->
+        </div><!-- /PANEL 1 -->
+
+        <!-- ── PANEL 2: DRINKS ───────────────────────── -->
+        <div class="menu-panel" data-panel="drinks">
+          <div class="panel-header">
+            <p class="panel-eyebrow">02 / 03</p>
+            <h3 class="panel-title">Drinks</h3>
+            <p class="panel-hint">Choose a category &rarr;</p>
+          </div>
+          <div class="panel-categories">
+
+            <button class="cat-card" data-cat="coffee"
+              data-items='[
+                {"name":"Cappuccino","desc":"Double espresso with steamed milk and a thick layer of velvety foam"},
+                {"name":"Americano","desc":"Double espresso diluted with hot water — clean, long, grounding"},
+                {"name":"Espresso Single","desc":"One shot. Pure. Nothing added."},
+                {"name":"Espresso Double","desc":"Two shots pulled together. The afternoon reset."}
+              ]'>
+              <!-- Replace src with your own coffee image -->
+              <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=400&fit=crop&q=80" alt="Coffee" />
+              <span class="cat-label">Coffee</span>
+            </button>
+
+            <button class="cat-card" data-cat="juices"
+              data-items='[
+                {"name":"Fresh Orange Juice","desc":"Cold-pressed Valencia oranges. Nothing else."},
+                {"name":"Watermelon Juice","desc":"Blended fresh watermelon, a squeeze of lime"},
+                {"name":"Mixed Tropical","desc":"Mango, pineapple, passion fruit — pressed together slowly"}
+              ]'>
+              <!-- Replace src with your own juices image -->
+              <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600&h=400&fit=crop&q=80" alt="Juices" />
+              <span class="cat-label">Juices</span>
+            </button>
+
+            <button class="cat-card" data-cat="smoothies"
+              data-items='[
+                {"name":"Berry Blend","desc":"Strawberry, blueberry, raspberry, banana & oat milk"},
+                {"name":"Green Power","desc":"Spinach, cucumber, green apple, ginger & coconut water"},
+                {"name":"Mango Lassi","desc":"Ripe mango, yoghurt, a pinch of cardamom & honey"}
+              ]'>
+              <!-- Replace src with your own smoothies image -->
+              <img src="https://images.unsplash.com/photo-1494597564530-871f2b93ac55?w=600&h=400&fit=crop&q=80" alt="Smoothies" />
+              <span class="cat-label">Smoothies</span>
+            </button>
+
+            <button class="cat-card" data-cat="tea"
+              data-items='[
+                {"name":"English Breakfast","desc":"Bold black tea, best with a small pour of cold milk"},
+                {"name":"Chamomile","desc":"Dried chamomile flowers steeped slow. Evening tea."},
+                {"name":"Mint Tea","desc":"Fresh garden mint, hot water, a spoon of honey"}
+              ]'>
+              <!-- Replace src with your own tea image -->
+              <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&h=400&fit=crop&q=80" alt="Tea" />
+              <span class="cat-label">Tea</span>
+            </button>
+
+          </div>
+        </div><!-- /PANEL 2 -->
+
+        <!-- ── PANEL 3: DESSERTS ─────────────────────── -->
+        <div class="menu-panel" data-panel="desserts">
+          <div class="panel-header">
+            <p class="panel-eyebrow">03 / 03</p>
+            <h3 class="panel-title">Desserts</h3>
+            <p class="panel-hint">Choose a category &rarr;</p>
+          </div>
+          <div class="panel-categories">
+
+            <button class="cat-card" data-cat="freakshakes"
+              data-items='[
+                {"name":"Baileys Freakshake","desc":"A tower of indulgence. Baileys cream, dark chocolate, whipped cloud on top."},
+                {"name":"Velvet Dream","desc":"Strawberry ice cream milkshake, red velvet cake, whipped cream & strawberry syrup"}
+              ]'>
+              <!-- Replace src with your own freakshakes image -->
+              <img src="https://images.unsplash.com/photo-1568901839119-631418a3910d?w=600&h=400&fit=crop&q=80" alt="Freakshakes" />
+              <span class="cat-label">Freakshakes</span>
+            </button>
+
+            <button class="cat-card" data-cat="pancakes"
+              data-items='[
+                {"name":"Biscoff Pancakes","desc":"Pancakes with biscoff spread and biscuits — warm, layered, exactly right"},
+                {"name":"Pancake with Ice Cream","desc":"Stack of three, a generous scoop, warm chocolate ribboned through"},
+                {"name":"Pancake Cone Combo","desc":"Pancake stack with two scoops of ice cream on a cone"},
+                {"name":"Plain Pancake","desc":"Three layers. Warm maple. A pat of butter, slowly giving way."}
+              ]'>
+              <!-- Replace src with your own pancakes image -->
+              <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=600&h=400&fit=crop&q=80" alt="Pancakes" />
+              <span class="cat-label">Pancakes</span>
+            </button>
+
+            <button class="cat-card" data-cat="waffles"
+              data-items='[
+                {"name":"Classic Waffle","desc":"Crisp Liège waffle, warm maple syrup & a dusting of icing sugar"},
+                {"name":"Chocolate Drip Waffle","desc":"Waffle, dark chocolate sauce, vanilla ice cream, crushed hazelnuts"},
+                {"name":"Strawberry Waffle","desc":"Fresh strawberries, cream, strawberry coulis on a warm Belgian waffle"}
+              ]'>
+              <!-- Replace src with your own waffles image -->
+              <img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=600&h=400&fit=crop&q=80" alt="Waffles" />
+              <span class="cat-label">Waffles</span>
+            </button>
+
+            <button class="cat-card" data-cat="icecream"
+              data-items='[
+                {"name":"Vanilla Bean","desc":"Single-origin Madagascar vanilla, hand-spun in small batches"},
+                {"name":"Dark Chocolate","desc":"70% Ghanaian cacao, ribboned through cream, finished cold"},
+                {"name":"Strawberry","desc":"Strawberries pressed this morning, stirred into cream, served before they settle"}
+              ]'>
+              <!-- Replace src with your own ice cream image -->
+              <img src="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?w=600&h=400&fit=crop&q=80" alt="Ice Cream" />
+              <span class="cat-label">Ice Cream</span>
+            </button>
+
+          </div>
+        </div><!-- /PANEL 3 -->
+
+      </div><!-- /menu-horiz-track -->
+
+      <!-- Panel progress indicators -->
+      <div class="menu-panel-dots">
+        <span class="mpd active" data-mpd="0">Food</span>
+        <span class="mpd" data-mpd="1">Drinks</span>
+        <span class="mpd" data-mpd="2">Desserts</span>
+      </div>
+
+    </div><!-- /menu-horiz-outer -->
+
+    <!-- Full menu CTA -->
+    <div id="menu-full-cta">
+      <p class="mfc-label">Want everything?</p>
+      <a href="https://oddmenu.com/p/frozenspoon-gh/cmkbj1hy00f3mwd6r17wm2xuh"
+         target="_blank" rel="noopener" class="mfc-link">
+        View full menu &rarr;
+      </a>
+    </div>
+
+  </section>
+  <!-- =====================================================
+       END MENU SECTION
+  ===================================================== -->
+
+  <!-- Items overlay — injected here, controlled by JS -->
+  <div id="menu-items-overlay" aria-hidden="true">
+    <div id="mio-inner">
+      <button id="mio-close" aria-label="Close">
+        <span>&larr;</span> Back
+      </button>
+      <p class="mio-eyebrow" id="mio-eyebrow">Category</p>
+      <h3 class="mio-title" id="mio-title">Items</h3>
+      <ul class="mio-list" id="mio-list"></ul>
+    </div>
+  </div>
+
+
+
+
+  <!-- =====================================================
+       GALLERY SECTION
+       Slot after closing </section> of #menu
+  ===================================================== -->
+  <section id="gallery" aria-label="Gallery" style="position:relative;z-index:2;">
+
+    <!--
+      #gallery-scroller  — provides the scroll distance (450vh)
+      #gallery-sticky    — CSS sticky frame, stays at top:0
+      Everything lives inside the sticky frame so GSAP scrub
+      can reverse the whole animation by scrolling back up.
+    -->
+    <div id="gallery-scroller">
+      <div id="gallery-sticky">
+
+        <!-- Floating pink & yellow background blobs -->
+        <div class="g-blob g-blob-1"></div>
+        <div class="g-blob g-blob-2"></div>
+        <div class="g-blob g-blob-3"></div>
+        <div class="g-blob g-blob-4"></div>
+        <div class="g-blob g-blob-5"></div>
+
+        <!-- Intro — centered, fades out at first scroll -->
+        <div class="gallery-intro">
+          <p class="gallery-eyebrow">The Gallery</p>
+          <h2 class="gallery-headline">
+            <span class="ghl-1">Moments,</span>
+            <span class="ghl-2">made visible.</span>
+          </h2>
+        </div>
+
+        <!-- Stack stage — LEFT side -->
+        <div id="gallery-stack-area">
+          <div class="g-stack-hint">
+            <span class="gsh-line"></span>
+            <span class="gsh-text">Scroll to reveal</span>
+          </div>
+
+          <div id="g-stack">
+            <div class="g-card" data-gcard="1">
+              <img src="./images/gal.jpeg" alt="Gallery 1" />
+              <span class="g-card-num">01</span>
+            </div>
+            <div class="g-card" data-gcard="2">
+              <img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?w=700&h=900&fit=crop&q=80" alt="Gallery 2" />
+              <span class="g-card-num">02</span>
+            </div>
+            <div class="g-card" data-gcard="3">
+              <img src="./images/gal3.JPEG" alt="Gallery 3" />
+              <span class="g-card-num">03</span>
+            </div>
+            <div class="g-card" data-gcard="4">
+              <img src="./images/gal4.JPEG" alt="Gallery 4" />
+              <span class="g-card-num">04</span>
+            </div>
+            <div class="g-card" data-gcard="5">
+              <img src="./images/gal1.JPEG" alt="Gallery 5" />
+              <span class="g-card-num">05</span>
+            </div>
+            <div class="g-card" data-gcard="6">
+              <img src="./images/gal5.JPEG" alt="Gallery 6" />
+              <span class="g-card-num">06</span>
+            </div>
+          </div><!-- /g-stack -->
+
+          <div id="g-counter">
+            <span id="g-counter-num">00</span>
+            <span class="g-counter-sep">/</span>
+            <span>14</span>
+          </div>
+        </div><!-- /gallery-stack-area -->
+
+        <!-- Stack stage — BOTTOM RIGHT (8 cards, fly in from left) -->
+        <div id="gallery-stack-area-right">
+          <div id="g-stack-right">
+            <div class="g-card" data-gcard="7">
+              <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=700&h=900&fit=crop&q=80" alt="Gallery 7" />
+              <span class="g-card-num">07</span>
+            </div>
+            <div class="g-card" data-gcard="8">
+              <img src="https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=700&h=900&fit=crop&q=80" alt="Gallery 8" />
+              <span class="g-card-num">08</span>
+            </div>
+            <div class="g-card" data-gcard="9">
+              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&h=900&fit=crop&q=80" alt="Gallery 9" />
+              <span class="g-card-num">09</span>
+            </div>
+            <div class="g-card" data-gcard="10">
+              <img src="./images/gal2.JPEG" alt="Gallery 10" />
+              <span class="g-card-num">10</span>
+            </div>
+            <div class="g-card" data-gcard="11">
+              <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=700&h=900&fit=crop&q=80" alt="Gallery 11" />
+              <span class="g-card-num">11</span>
+            </div>
+            <div class="g-card" data-gcard="12">
+              <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=700&h=900&fit=crop&q=80" alt="Gallery 12" />
+              <span class="g-card-num">12</span>
+            </div>
+            <div class="g-card" data-gcard="13">
+              <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=700&h=900&fit=crop&q=80" alt="Gallery 13" />
+              <span class="g-card-num">13</span>
+            </div>
+            <div class="g-card" data-gcard="14">
+              <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=700&h=900&fit=crop&q=80" alt="Gallery 14" />
+              <span class="g-card-num">14</span>
+            </div>
+          </div><!-- /g-stack-right -->
+        </div><!-- /gallery-stack-area-right -->
+
+        <!-- Grid overlay — fades in over the stacks -->
+        <div id="gallery-grid-wrap">
+          <div id="gallery-grid">
+            <!-- Slots 1–14 pre-populated by JS at init from the two stacks -->
+            <div class="g-grid-slot" data-slot="1"></div>
+            <div class="g-grid-slot" data-slot="2"></div>
+            <div class="g-grid-slot" data-slot="3"></div>
+            <div class="g-grid-slot" data-slot="4"></div>
+            <div class="g-grid-slot" data-slot="5"></div>
+            <div class="g-grid-slot" data-slot="6"></div>
+            <div class="g-grid-slot" data-slot="7"></div>
+            <div class="g-grid-slot" data-slot="8"></div>
+            <div class="g-grid-slot" data-slot="9"></div>
+            <div class="g-grid-slot" data-slot="10"></div>
+            <div class="g-grid-slot" data-slot="11"></div>
+            <div class="g-grid-slot" data-slot="12"></div>
+            <div class="g-grid-slot" data-slot="13"></div>
+            <div class="g-grid-slot" data-slot="14"></div>
+          </div><!-- /gallery-grid -->
+
+          <div id="gallery-more-wrap">
+            <button id="gallery-more-btn">
+              View all photos
+              <span class="gmb-count">+11</span>
+            </button>
+          </div>
+        </div><!-- /gallery-grid-wrap -->
+
+      </div><!-- /gallery-sticky -->
+    </div><!-- /gallery-scroller -->
+
+    <!-- Hidden cards (15–25) — appear below the sticky frame on View More click.
+         Styled to match the main grid so they feel like a seamless extension. -->
+    <div id="gallery-hidden">
+      <div class="g-hidden-card">
+        <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=700&h=467&fit=crop&q=80" alt="Gallery 15" />
+        <span class="g-card-num">15</span>
+      </div>
+      <div class="g-hidden-card">
+        <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=700&h=467&fit=crop&q=80" alt="Gallery 16" />
+        <span class="g-card-num">16</span>
+      </div>
+      <div class="g-hidden-card">
+        <img src="https://images.unsplash.com/photo-1582716401301-b2407dc7563d?w=700&h=467&fit=crop&q=80" alt="Gallery 17" />
+        <span class="g-card-num">17</span>
+      </div>
+      <div class="g-hidden-card">
+        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=700&h=467&fit=crop&q=80" alt="Gallery 18" />
+        <span class="g-card-num">18</span>
+      </div>
+      <div class="g-hidden-card">
+        <img src="https://images.unsplash.com/photo-1607478900766-efe13624a96c?w=700&h=467&fit=crop&q=80" alt="Gallery 19" />
+        <span class="g-card-num">19</span>
+      </div>
+      <div class="g-hidden-card">
+        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=700&h=467&fit=crop&q=80" alt="Gallery 20" />
+        <span class="g-card-num">20</span>
+      </div>
+      <div class="g-hidden-card">
+        <img src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=700&h=467&fit=crop&q=80" alt="Gallery 21" />
+        <span class="g-card-num">21</span>
+      </div>
+      <div class="g-hidden-card">
+        <img src="https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=700&h=467&fit=crop&q=80" alt="Gallery 22" />
+        <span class="g-card-num">22</span>
+      </div>
+      <div class="g-hidden-card">
+        <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=700&h=467&fit=crop&q=80" alt="Gallery 23" />
+        <span class="g-card-num">23</span>
+      </div>
+      <div class="g-hidden-card">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=700&h=467&fit=crop&q=80" alt="Gallery 24" />
+        <span class="g-card-num">24</span>
+      </div>
+      <div class="g-hidden-card">
+        <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=700&h=467&fit=crop&q=80" alt="Gallery 25" />
+        <span class="g-card-num">25</span>
+      </div>
+    </div><!-- /gallery-hidden -->
+
+  </section>
+  <!-- =====================================================
+       END GALLERY SECTION
+  ===================================================== -->
+
+  <!-- =====================================================
+       GALLERY LIGHTBOX
+  ===================================================== -->
+  <div id="g-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="glb-close" aria-label="Close photo viewer">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <button class="glb-prev" aria-label="Previous photo">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <polyline points="18,4 8,14 18,24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="glb-next" aria-label="Next photo">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <polyline points="10,4 20,14 10,24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <figure class="glb-figure">
+      <img class="glb-img" src="" alt="" />
+    </figure>
+    <p class="glb-counter"></p>
+  </div>
+
+
+
+
+
+  <!-- =====================================================
+       STATEMENT SECTION
+       Sticky sandwich — gallery passes above, WWD passes below.
+       Two full-bleed slides auto-play with zoom + word reveals.
+       Swap the background-image values to use your own photos.
+  ===================================================== -->
+  <section id="statement" aria-label="Statement">
+
+    <!-- ── SLIDE 1 ──────────────────────────────── -->
+    <div class="stmt-slide" data-slide="1">
+      <div class="stmt-slide-bg"
+           style="background-image: url('https://images.unsplash.com/photo-1488477181946-6428a0291777?w=1600&h=900&fit=crop&q=85');"
+           aria-hidden="true"></div>
+      <div class="stmt-overlay"></div>
+      <div class="stmt-words">
+        <p class="stmt-eyebrow">Frozen Spoon</p>
+        <h2 class="stmt-headline">
+          <span class="stmt-line">
+            <span class="stmt-clip"><span class="stmt-w">Every</span></span>
+            <span class="stmt-clip"><span class="stmt-w">scoop</span></span>
+            <span class="stmt-clip"><span class="stmt-w">tells</span></span>
+          </span>
+          <span class="stmt-line">
+            <span class="stmt-clip stmt-accent"><span class="stmt-w">a story</span></span>
+            <span class="stmt-clip"><span class="stmt-w">worth</span></span>
+            <span class="stmt-clip"><span class="stmt-w">savouring.</span></span>
+          </span>
+        </h2>
+        <div class="stmt-rule" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <!-- ── SLIDE 2 ──────────────────────────────── -->
+    <div class="stmt-slide" data-slide="2">
+      <div class="stmt-slide-bg"
+           style="background-image: url('./images/sta-1.JPEG');"
+           aria-hidden="true"></div>
+      <div class="stmt-overlay"></div>
+      <div class="stmt-words">
+        <p class="stmt-eyebrow">Since 2019</p>
+        <h2 class="stmt-headline">
+          <span class="stmt-line">
+            <span class="stmt-clip"><span class="stmt-w">Made</span></span>
+            <span class="stmt-clip"><span class="stmt-w">small.</span></span>
+          </span>
+          <span class="stmt-line">
+            <span class="stmt-clip stmt-accent"><span class="stmt-w">Served</span></span>
+            <span class="stmt-clip"><span class="stmt-w">with</span></span>
+            <span class="stmt-clip"><span class="stmt-w">heart.</span></span>
+          </span>
+        </h2>
+        <div class="stmt-rule" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <!-- Slide indicator dots -->
+    <div class="stmt-dots" aria-hidden="true">
+      <span class="stmt-dot stmt-dot-active"></span>
+      <span class="stmt-dot"></span>
+    </div>
+
+  </section>
+  <!-- =====================================================
+       END STATEMENT SECTION
+  ===================================================== -->
+
+
+  <!-- =====================================================
+       WHAT WE DO SECTION
+       Slot after closing </section> of #gallery
+  ===================================================== -->
+  <section id="services" aria-label="What We Do" style="position:relative;z-index:2;">
+
+    <!-- Ambient background orbs — give the dark bg life without distraction -->
+    <div class="wwd-blob wwd-blob-1"></div>
+    <div class="wwd-blob wwd-blob-2"></div>
+    <div class="wwd-blob wwd-blob-3"></div>
+
+    <!-- Section label that fades in above the pin -->
+    <div class="wwd-intro">
+      <p class="wwd-intro-eyebrow">What We Do</p>
+      <h2 class="wwd-intro-headline">
+        <span class="wwd-hl-wrap"><span class="wwd-hl-inner wwd-word-ready">Ready,</span></span>
+        <span class="wwd-hl-wrap wwd-hl-wrap-pop"><span class="wwd-hl-inner wwd-word-set">Set,</span></span>
+        <span class="wwd-hl-wrap"><span class="wwd-hl-inner wwd-word-indulge">Indulge</span></span>
+      </h2>
+    </div>
+
+    <!-- ── PIN CONTAINER — the entire narrative lives here ── -->
+    <div id="wwd-pin-outer">
+      <div id="wwd-stage">
+
+        <!-- Persistent left column (text changes per scene) -->
+        <div id="wwd-left">
+
+          <!-- Scene counter -->
+          <div id="wwd-scene-counter">
+            <span id="wwd-scene-num">01</span>
+            <span class="wwd-counter-sep">/</span>
+            <span>04</span>
+          </div>
+
+          <!-- Scene content — one per scene, JS shows/hides -->
+
+          <!-- SCENE 1: The CEO -->
+          <div class="wwd-text-block active" data-scene="1">
+            <p class="wwd-eyebrow">The CEO</p>
+            <h3 class="wwd-headline">
+              <span class="wwd-line-wrap"><span class="wwd-line">Joana</span></span>
+              <span class="wwd-line-wrap"><span class="wwd-line">Hammond-</span></span>
+              <span class="wwd-line-wrap"><span class="wwd-line italic">Ahorlu.</span></span>
+            </h3>
+            <div class="wwd-body">
+              <p class="wwd-body-line"><span>She started with one freezer</span></p>
+              <p class="wwd-body-line"><span>and an idea that good food</span></p>
+              <p class="wwd-body-line"><span>should never feel complicated.</span></p>
+              <p class="wwd-body-line"><span>Joana built Frozen Spoon from</span></p>
+              <p class="wwd-body-line"><span>the kitchen outward — every</span></p>
+              <p class="wwd-body-line"><span>recipe, every detail, by hand.</span></p>
+            </div>
+            <div class="wwd-tag-row">
+              <span class="wwd-tag">Founded 2019</span>
+              <span class="wwd-tag">Accra, Ghana</span>
+            </div>
+          </div>
+
+          <!-- SCENE 2: The Kitchen -->
+          <div class="wwd-text-block" data-scene="2">
+            <p class="wwd-eyebrow">The Kitchen</p>
+            <h3 class="wwd-headline">
+              <span class="wwd-line-wrap"><span class="wwd-line">Made</span></span>
+              <span class="wwd-line-wrap"><span class="wwd-line italic">by hand.</span></span>
+              <span class="wwd-line-wrap"><span class="wwd-line">Always.</span></span>
+            </h3>
+            <div class="wwd-body">
+              <p class="wwd-body-line"><span>No timers. No compromises.</span></p>
+              <p class="wwd-body-line"><span>Small batches because that</span></p>
+              <p class="wwd-body-line"><span>is the only way we know how.</span></p>
+              <p class="wwd-body-line"><span>Every scoop spun fresh.</span></p>
+              <p class="wwd-body-line"><span>Every waffle made to order.</span></p>
+              <p class="wwd-body-line"><span>Exact, every time.</span></p>
+            </div>
+            <div class="wwd-tag-row">
+              <span class="wwd-tag">Small batch</span>
+              <span class="wwd-tag">Made fresh daily</span>
+            </div>
+          </div>
+
+          <!-- SCENE 3: The Experience -->
+          <div class="wwd-text-block" data-scene="3">
+            <p class="wwd-eyebrow">The Experience</p>
+            <h3 class="wwd-headline">
+              <span class="wwd-line-wrap"><span class="wwd-line">A place</span></span>
+              <span class="wwd-line-wrap"><span class="wwd-line">that feels</span></span>
+              <span class="wwd-line-wrap"><span class="wwd-line italic">like yours.</span></span>
+            </h3>
+            <div class="wwd-body">
+              <p class="wwd-body-line"><span>Warm light. Unhurried pace.</span></p>
+              <p class="wwd-body-line"><span>A table that asks nothing</span></p>
+              <p class="wwd-body-line"><span>of you except to sit.</span></p>
+              <p class="wwd-body-line"><span>We designed the space the</span></p>
+              <p class="wwd-body-line"><span>same way we designed the menu</span></p>
+              <p class="wwd-body-line"><span>— with quiet intention.</span></p>
+            </div>
+            <div class="wwd-tag-row">
+              <span class="wwd-tag">Dine in</span>
+              <span class="wwd-tag">Takeaway</span>
+              <span class="wwd-tag">Events</span>
+            </div>
+          </div>
+
+          <!-- SCENE 4: The Craft -->
+          <div class="wwd-text-block" data-scene="4">
+            <p class="wwd-eyebrow">The Craft</p>
+            <h3 class="wwd-headline">
+              <span class="wwd-line-wrap"><span class="wwd-line">Sourced</span></span>
+              <span class="wwd-line-wrap"><span class="wwd-line italic">with care.</span></span>
+              <span class="wwd-line-wrap"><span class="wwd-line">Served with pride.</span></span>
+            </h3>
+            <div class="wwd-body">
+              <p class="wwd-body-line"><span>Single-origin chocolate.</span></p>
+              <p class="wwd-body-line"><span>Madagascan vanilla.</span></p>
+              <p class="wwd-body-line"><span>Strawberries pressed the</span></p>
+              <p class="wwd-body-line"><span>same morning they are served.</span></p>
+              <p class="wwd-body-line"><span>Ingredients chosen the way</span></p>
+              <p class="wwd-body-line"><span>you choose what matters.</span></p>
+            </div>
+            <div class="wwd-tag-row">
+              <span class="wwd-tag">Single-origin</span>
+              <span class="wwd-tag">Seasonal menu</span>
+            </div>
+          </div>
+
+        </div><!-- /wwd-left -->
+
+        <!-- Persistent right column (image changes per scene) -->
+        <div id="wwd-right">
+
+          <!-- Image clip frame — clip-path animates on each scene -->
+          <div id="wwd-img-frame">
+
+            <!-- Scene 1: Founder portrait placeholder -->
+            <!-- Replace src with Joana's photo when ready -->
+            <div class="wwd-img-layer active" data-img="1">
+              <img
+                src="images/joana.jpg"
+                alt="Joana Hammond-Ahorlu, Founder of Frozen Spoon"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+              />
+              <div class="wwd-img-placeholder">
+                <p class="wwd-placeholder-name">Joana Hammond-Ahorlu</p>
+                <p class="wwd-placeholder-sub">Replace with founder portrait</p>
+              </div>
+            </div>
+
+            <!-- Scene 2: Kitchen — 3 images cycle every 3 s -->
+            <div class="wwd-img-layer" data-img="2">
+              <div class="wwd-flip-panel wwd-fp-active">
+                <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=1000&fit=crop&q=85" alt="The Frozen Spoon kitchen"/>
+              </div>
+              <div class="wwd-flip-panel">
+                <img src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=800&h=1000&fit=crop&q=85" alt="Fresh ingredients"/>
+              </div>
+              <div class="wwd-flip-panel">
+                <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&h=1000&fit=crop&q=85" alt="Kitchen craft"/>
+              </div>
+            </div>
+
+            <!-- Scene 3: The space — 3 images cycle every 3 s -->
+            <div class="wwd-img-layer" data-img="3">
+              <div class="wwd-flip-panel wwd-fp-active">
+                <img src="./images/vis1.jpeg" alt="The Frozen Spoon space"/>
+              </div>
+              <div class="wwd-flip-panel">
+                <img src="./images/vis.jpeg" alt="Cozy cafe seating"/>
+              </div>
+              <div class="wwd-flip-panel">
+                <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=800&h=1000&fit=crop&q=85" alt="Warm cafe atmosphere"/>
+              </div>
+            </div>
+
+            <!-- Scene 4: Craft — 3 images cycle every 3 s -->
+            <div class="wwd-img-layer" data-img="4">
+              <div class="wwd-flip-panel wwd-fp-active">
+                <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&h=1000&fit=crop&q=85" alt="The Frozen Spoon craft"/>
+              </div>
+              <div class="wwd-flip-panel">
+                <img src="https://images.unsplash.com/photo-1582718228435-69c8f4a4c5f0?w=800&h=1000&fit=crop&q=85" alt="Single-origin chocolate"/>
+              </div>
+              <div class="wwd-flip-panel">
+                <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&h=1000&fit=crop&q=85" alt="Seasonal ingredients"/>
+              </div>
+            </div>
+
+            <!-- Subtle scene progress bar on image -->
+            <div id="wwd-img-progress">
+              <div id="wwd-img-progress-fill"></div>
+            </div>
+
+          </div><!-- /wwd-img-frame -->
+
+          <!-- Image caption -->
+          <p id="wwd-img-caption">The CEO</p>
+
+        </div><!-- /wwd-right -->
+
+        <!-- Sprinkles (JS populates) -->
+        <div id="wwd-sprinkles" aria-hidden="true"></div>
+
+        <!-- Scene nav dots (right edge) -->
+        <div id="wwd-dots">
+          <button class="wwd-dot active" data-wdot="1" aria-label="Scene 1"></button>
+          <button class="wwd-dot"        data-wdot="2" aria-label="Scene 2"></button>
+          <button class="wwd-dot"        data-wdot="3" aria-label="Scene 3"></button>
+          <button class="wwd-dot"        data-wdot="4" aria-label="Scene 4"></button>
+        </div>
+
+      </div><!-- /wwd-stage -->
+    </div><!-- /wwd-pin-outer -->
+
+    <!-- Section exit line -->
+    <div class="wwd-exit">
+
+      <!-- Looping background video — muted, autoplays silently -->
+      <video class="wwd-exit-video" autoplay muted loop playsinline aria-hidden="true">
+        <source src="videos/Brownie-waffles.mp4" type="video/mp4">
+      </video>
+      <div class="wwd-exit-overlay" aria-hidden="true"></div>
+
+      <!-- Headline split into words — GSAP animates each one in -->
+      <p class="wwd-exit-line">
+        <span class="wwd-exit-word">This</span>
+        <span class="wwd-exit-word">is</span>
+        <span class="wwd-exit-word">what</span>
+        <span class="wwd-exit-word">we</span>
+        <span class="wwd-exit-word">do.</span>
+      </p>
+
+      <span class="wwd-exit-cta">
+        <a href="#menu">See the menu &rarr;</a>
+      </span>
+
+    </div>
+
+  </section>
+  <!-- =====================================================
+       END WHAT WE DO SECTION
+  ===================================================== -->
+
+
+
+
+
+  <!-- =====================================================
+       TESTIMONIALS SECTION
+       Slot after closing </section> of #services
+  ===================================================== -->
+  <section id="testimonials" aria-label="Testimonials">
+
+    <!-- ── Background image layer ── -->
+    <!-- To change background: replace the src below with your own image path -->
+    <!-- Recommended: a moody overhead food shot, dark-toned kitchen, or dessert close-up -->
+    <div id="testi-bg">
+      <img
+        src="./images/test2.jpeg"
+        alt=""
+        aria-hidden="true"
+        id="testi-bg-img"
+      />
+      <!-- To swap: change the src above to your own image, e.g. src="images/bg-testimonials.jpg" -->
+    </div>
+
+    <!-- Dark overlay on top of background -->
+    <div id="testi-overlay"></div>
+
+    <!-- ── Section header ── -->
+    <div class="testi-header">
+      <h2 class="testi-main-headline">
+        <span class="testi-hl-wrap"><span class="testi-hl-line">Don't Just Take</span></span>
+        <span class="testi-hl-wrap"><span class="testi-hl-line testi-italic">Our Word For It.</span></span>
+      </h2>
+      <p class="testi-sub-headline">What our customers say.</p>
+    </div>
+
+    <!-- ── The Card ── -->
+    <div id="testi-card" aria-live="polite">
+
+      <!-- Left: Avatar stack -->
+      <div id="testi-avatars">
+        <div class="testi-avatar-track">
+
+          <div class="testi-av-item active" data-av="0">
+            <div class="testi-av-ring"></div>
+            <!-- Replace src with customer photo or leave as initials -->
+            <div class="testi-av-circle">
+              <span class="testi-av-initial">A</span>
+            </div>
+          </div>
+          <div class="testi-av-connector"></div>
+
+          <div class="testi-av-item" data-av="1">
+            <div class="testi-av-ring"></div>
+            <div class="testi-av-circle">
+              <span class="testi-av-initial">K</span>
+            </div>
+          </div>
+          <div class="testi-av-connector"></div>
+
+          <div class="testi-av-item" data-av="2">
+            <div class="testi-av-ring"></div>
+            <div class="testi-av-circle">
+              <span class="testi-av-initial">E</span>
+            </div>
+          </div>
+          <div class="testi-av-connector"></div>
+
+          <div class="testi-av-item" data-av="3">
+            <div class="testi-av-ring"></div>
+            <div class="testi-av-circle">
+              <span class="testi-av-initial">M</span>
+            </div>
+          </div>
+          <div class="testi-av-connector"></div>
+
+          <div class="testi-av-item" data-av="4">
+            <div class="testi-av-ring"></div>
+            <div class="testi-av-circle">
+              <span class="testi-av-initial">D</span>
+            </div>
+          </div>
+
+        </div><!-- /testi-avatar-track -->
+      </div><!-- /testi-avatars -->
+
+      <!-- Divider -->
+      <div class="testi-card-divider"></div>
+
+      <!-- Right: Quote content -->
+      <div id="testi-content">
+        <span class="testi-quote-mark">&ldquo;</span>
+
+        <!-- Quote text — clip-reveal on transition -->
+        <div id="testi-quote-wrap">
+          <p id="testi-quote-text" class="testi-quote">
+            The Biscoff pancakes are something I think about on bad days.
+            Warm, generous, exactly right. There is nowhere else in Accra
+            that makes you feel this well looked after.
+          </p>
+        </div>
+
+        <div id="testi-reviewer">
+          <p id="testi-name">Ama Osei-Bonsu</p>
+          <p id="testi-descriptor">Regular since 2022 · Accra</p>
+        </div>
+
+        <!-- Progress bar -->
+        <div id="testi-progress-bar">
+          <div id="testi-progress-fill"></div>
+        </div>
+
+      </div><!-- /testi-content -->
+
+    </div><!-- /testi-card -->
+
+    <!-- Navigation arrows -->
+    <div id="testi-nav">
+      <button id="testi-prev" aria-label="Previous testimonial">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div id="testi-count">
+        <span id="testi-count-cur">1</span>
+        <span class="testi-count-sep">/</span>
+        <span>5</span>
+      </div>
+      <button id="testi-next" aria-label="Next testimonial">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M8 4L14 10L8 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </section>
+  <!-- =====================================================
+       END TESTIMONIALS SECTION
+  ===================================================== -->    
+
+
+
+  <!-- =====================================================
+       FOOTER
+       Slot after closing </section> of #testimonials
+  ===================================================== -->
+  <footer id="site-footer" aria-label="Site footer">
+
+    <!-- ── Top marquee strip ── -->
+    <div id="footer-marquee-outer">
+      <div id="footer-marquee-track">
+        <span class="fm-item fm-pink">Cold cream</span>
+        <span class="fm-sep">&middot;</span>
+        <span class="fm-item fm-italic fm-white">warm chocolate</span>
+        <span class="fm-sep">&middot;</span>
+        <span class="fm-item fm-yellow">exact joy</span>
+        <span class="fm-sep">&middot;</span>
+        <span class="fm-item fm-italic fm-pink">made by hand</span>
+        <span class="fm-sep">&middot;</span>
+        <span class="fm-item fm-white">Accra, Ghana</span>
+        <span class="fm-sep">&middot;</span>
+        <span class="fm-item fm-italic fm-yellow">since 2019</span>
+        <span class="fm-sep">&middot;</span>
+        <span class="fm-item fm-pink">small batches</span>
+        <span class="fm-sep">&middot;</span>
+        <span class="fm-item fm-italic fm-white">finished slow</span>
+        <span class="fm-sep">&middot;</span>
+      </div>
+    </div>
+
+    <!-- ── Main footer body ── -->
+    <div id="footer-body">
+
+      <!-- Column 1: Brand + sign-off -->
+      <div class="footer-col footer-col-brand">
+
+        <!-- Logo (same swap pattern as nav) -->
+        <a href="#" class="footer-logo-link" aria-label="Frozen Spoon home">
+          <img
+            src="images/logo-light.png"
+            alt="Frozen Spoon"
+            class="footer-logo-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+          />
+          <span class="footer-logo-fallback">Frozen Spoon</span>
+        </a>
+
+        <p class="footer-tagline">
+          Cafe &amp; Gelato.<br />
+          <span class="footer-tagline-italic">Made cold. Served warm.</span>
+        </p>
+
+        <!-- Social icons -->
+        <div class="footer-socials">
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/233557388773"
+             target="_blank" rel="noopener"
+             class="footer-social-link"
+             aria-label="WhatsApp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+          </a>
+
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/frozenspoon_gh/"
+             target="_blank" rel="noopener"
+             class="footer-social-link"
+             aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+
+          <!-- TikTok -->
+          <a href="https://www.tiktok.com/search?q=frozen%20spoon&t=1778513128303"
+             target="_blank" rel="noopener"
+             class="footer-social-link"
+             aria-label="TikTok">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+            </svg>
+          </a>
+
+          <!-- Location / Google Maps -->
+          <a href="https://maps.google.com/?q=Kass+Towers,+15+Senchi+Street,+Airport+Residential,+Accra,+Ghana"
+             target="_blank" rel="noopener"
+             class="footer-social-link"
+             aria-label="Find us on Google Maps">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </a>
+
+        </div><!-- /footer-socials -->
+      </div><!-- /footer-col-brand -->
+
+      <!-- Column 2: Navigate -->
+      <div class="footer-col">
+        <p class="footer-col-heading">Navigate</p>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#services">What We Do</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Visit -->
+      <div class="footer-col">
+        <p class="footer-col-heading">Visit</p>
+        <ul class="footer-links footer-links-info">
+          <li class="footer-info-item">
+            <span class="footer-info-label">Restaurant</span>
+            Homemade gelato, desserts,<br />coffee and food
+          </li>
+          <li>
+            <a href="https://maps.google.com/?q=Kass+Towers,+15+Senchi+Street,+Airport+Residential,+Accra,+Ghana"
+               target="_blank" rel="noopener">
+              Kass Towers, 15 Senchi Street,<br />
+              Airport Residential, Accra, Ghana
+            </a>
+          </li>
+          <li class="footer-info-item">
+            <span class="footer-info-label">Hours</span>
+            Mon &ndash; Sat: 7:00am &ndash; 11pm<br />
+            Sundays: 2:00pm &ndash; 11pm
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Full menu link + quote -->
+      <div class="footer-col footer-col-cta">
+        <p class="footer-col-heading">The Menu</p>
+        <p class="footer-cta-quote">
+          A short list.<br />
+          <span class="fct-italic">Made fresh,<br />finished slow.</span>
+        </p>
+        <a
+          href="https://oddmenu.com/p/frozenspoon-gh/cmkbj1hy00f3mwd6r17wm2xuh"
+          target="_blank"
+          rel="noopener"
+          class="footer-menu-btn"
+        >
+          View full menu
+        </a>
+      </div>
+
+    </div><!-- /footer-body -->
+
+    <!-- ── Divider ── -->
+    <div id="footer-divider"></div>
+
+    <!-- ── Bottom bar ── -->
+    <div id="footer-bottom">
+      <p class="footer-legal">
+        &copy; <span id="footer-year"></span> Frozen Spoon Cafe &amp; Gelato.
+        All rights reserved.
+      </p>
+      <p class="footer-credit">
+        Made cold. Served warm.
+      </p>
+      <!-- Back to top -->
+      <button id="footer-top-btn" aria-label="Back to top">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- ── Large background wordmark ── -->
+    <div id="footer-wordmark" aria-hidden="true">Frozen Spoon</div>
+
+  </footer>
+  <!-- =====================================================
+       END FOOTER
+  ===================================================== -->
+
+  <script src="script.js"></script>
+</body>
+</html>
