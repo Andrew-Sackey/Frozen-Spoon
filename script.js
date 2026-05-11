@@ -57,6 +57,60 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
 
+  // ── SMOOTH ANCHOR NAVIGATION ────────────────────────────
+  // CSS scroll-behavior:smooth is off to avoid conflicts with
+  // GSAP-pinned sections. This replaces it for all nav links.
+  (function initAnchorScroll() {
+    const allNavLinks = [
+      ...document.querySelectorAll('.nav-link, .nav-drawer-link'),
+    ];
+
+    allNavLinks.forEach(link => {
+      const href = link.getAttribute('href') || '';
+      if (!href.startsWith('#') || href === '#') return;
+
+      link.addEventListener('click', e => {
+        const target = document.getElementById(href.slice(1));
+        if (!target) return;
+        e.preventDefault();
+
+        // Calculate scroll target — offset by nav height
+        const navH  = parseInt(getComputedStyle(document.documentElement)
+                        .getPropertyValue('--nav-h'), 10) || 72;
+        const top   = target.getBoundingClientRect().top + window.scrollY - navH;
+
+        // Native smooth scroll
+        window.scrollTo({ top, behavior: 'smooth' });
+
+        // After the scroll settles (~900ms), refresh GSAP so all
+        // ScrollTriggers recalculate their active/inactive state.
+        // For #services specifically, also force the intro headline
+        // to play in case the once:true trigger was skipped.
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+          if (href === '#services') {
+            gsap.to('.wwd-intro-eyebrow', { opacity: 1, duration: 0.5, ease: 'power2.out' });
+            gsap.to('.wwd-word-ready',    { y: 0, duration: 0.80, ease: 'power3.out', delay: 0.10 });
+            gsap.to('.wwd-word-set',      { y: 0, duration: 0.85, ease: 'power3.out', delay: 0.26 });
+            gsap.to('.wwd-word-indulge',  { y: 0, filter: 'blur(0px)', duration: 1.0, ease: 'power3.out', delay: 0.44 });
+            // Ensure scene 1 text is visible and animated
+            const firstBlock = document.querySelector('.wwd-text-block[data-scene="1"]');
+            if (firstBlock) {
+              gsap.set(firstBlock, { opacity: 1 });
+              const lines = firstBlock.querySelectorAll('.wwd-line');
+              const spans = firstBlock.querySelectorAll('.wwd-body-line span');
+              const tags  = firstBlock.querySelector('.wwd-tag-row');
+              gsap.to(lines, { y: 0, duration: 0.85, ease: 'power3.out', stagger: 0.10 });
+              gsap.to(spans, { y: 0, duration: 0.65, ease: 'power3.out', stagger: 0.04 }, '+=0.1');
+              if (tags) gsap.to(tags, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+            }
+          }
+        }, 900);
+      });
+    });
+  })();
+
+
     // ── CONFIG ─────────────────────────────────────────────
     const CYCLE_DELAY  = 3400;    // ms between auto-advances
     const ANIM_DUR     = 0.85;    // orbit transition duration
@@ -2078,64 +2132,6 @@ ScrollTrigger.create({
     });
   });
 
-
-  // ── WWD: EXIT — LOOPING WORD MATERIALISE ───────────────
-  // Each cycle (~5 s): words fold in one-by-one → CTA appears → hold → all exit → repeat.
-  const wwdExitWords = [...document.querySelectorAll('.wwd-exit-word')];
-  const wwdExitCta   = document.querySelector('.wwd-exit-cta');
-
-  if (wwdExitWords.length) {
-    // Pre-hide before the timeline takes over
-    gsap.set(wwdExitWords, {
-      opacity: 0, y: 50, rotationX: 50,
-      transformPerspective: 900, transformOrigin: 'center bottom',
-      filter: 'blur(10px)',
-    });
-    gsap.set(wwdExitCta, { opacity: 0, y: 14 });
-
-    // ── Build the repeating timeline (paused — scroll trigger starts it) ──
-    const exitTl = gsap.timeline({ repeat: -1, repeatDelay: 0.5, paused: true });
-
-    exitTl
-      // Words fold forward, one after another   (0 → ~1.75s)
-      .fromTo(wwdExitWords,
-        { opacity: 0, y: 50, rotationX: 50,
-          transformPerspective: 900, transformOrigin: 'center bottom', filter: 'blur(10px)' },
-        { opacity: 1, y: 0, rotationX: 0, filter: 'blur(0px)',
-          duration: 1.0, ease: 'power3.out', stagger: { amount: 0.7, from: 'start' } },
-        0
-      )
-      // CTA slides up once the headline has landed  (~1.6s)
-      .fromTo(wwdExitCta,
-        { opacity: 0, y: 14 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
-        1.6
-      )
-      // Hold everything visible  (2.1 → 3.6s)
-      .to({}, { duration: 1.5 }, 2.1)
-      // CTA fades out first  (3.6s)
-      .to(wwdExitCta,
-        { opacity: 0, y: -10, duration: 0.38, ease: 'power2.in' },
-        3.6
-      )
-      // Words tilt back into darkness, reverse stagger  (3.8s → ~4.8s)
-      .to(wwdExitWords,
-        { opacity: 0, y: -38, rotationX: -48, filter: 'blur(9px)',
-          duration: 0.6, ease: 'power2.in', stagger: { amount: 0.42, from: 'end' } },
-        3.8
-      );
-
-    // ── ScrollTrigger starts / pauses the loop ──
-    ScrollTrigger.create({
-      trigger:    '.wwd-exit',
-      start:      'top 85%',
-      end:        'bottom top',
-      onEnter()      { exitTl.play(0); },
-      onLeave()      { exitTl.pause(); },
-      onEnterBack()  { exitTl.play(0); },
-      onLeaveBack()  { exitTl.pause(); },
-    });
-  }
 
 /* ============================================================
    END WHAT WE DO SECTION
